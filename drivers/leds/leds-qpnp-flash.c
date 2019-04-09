@@ -1268,7 +1268,7 @@ static void qpnp_flash_led_work(struct work_struct *work)
 	int rc, brightness = flash_node->cdev.brightness;
 	int max_curr_avail_ma = 0;
 	int total_curr_ma = 0;
-#if !((defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY))
+#if !((defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_MARKW))
 	int i;
 #endif
 	u8 val = 0;
@@ -1737,7 +1737,7 @@ static void qpnp_flash_led_work(struct work_struct *work)
 			led->fault_reg = temp;
 		}
 	}
-#if !((defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY))
+#if !((defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_MARKW))
 	else {
 		pr_err("Both Torch and Flash cannot be select at same time\n");
 		for (i = 0; i < led->num_leds; i++)
