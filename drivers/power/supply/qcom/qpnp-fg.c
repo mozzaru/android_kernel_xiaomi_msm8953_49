@@ -342,7 +342,12 @@ module_param_named(
 	first_est_dump, fg_est_dump, int, 00600
 );
 
+#ifdef CONFIG_MACH_XIAOMI_MARKW	
+char *fg_batt_type;
+static char *FG_BATT_TYPE_DEFAULT = "Default_Coslight_4000mah";
+#else
 static char *fg_batt_type;
+#endif
 module_param_named(
 	battery_type, fg_batt_type, charp, 00600
 );
