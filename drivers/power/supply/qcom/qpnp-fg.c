@@ -261,7 +261,7 @@ static struct fg_mem_setting settings[FG_MEM_SETTING_MAX] = {
 	SETTING(CHG_TERM_CURRENT, 0x4F8,   2,      250),
 	SETTING(IRQ_VOLT_EMPTY,	 0x458,   3,      3100),
 	SETTING(CUTOFF_VOLTAGE,	 0x40C,   0,      3200),
-#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE)
+#if ((defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE))
 	SETTING(VBAT_EST_DIFF,	 0x000,   0,      200),
 #else
 	SETTING(VBAT_EST_DIFF,	 0x000,   0,      30),
@@ -2044,7 +2044,7 @@ static void fg_handle_battery_insertion(struct fg_chip *chip)
 	schedule_delayed_work(&chip->update_sram_data, msecs_to_jiffies(0));
 }
 
-#if !((defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE))
+#if ((defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE))
 static int soc_to_setpoint(int soc)
 {
 	return DIV_ROUND_CLOSEST(soc * 255, 100);
@@ -8063,7 +8063,7 @@ static int fg_common_hw_init(struct fg_chip *chip)
 	}
 
 
-#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE)
+#if ((defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW) || (defined CONFIG_MACH_XIAOMI_TISSOT) || (defined CONFIG_MACH_XIAOMI_SAKURA) || (defined CONFIG_MACH_XIAOMI_DAISY) || (defined CONFIG_MACH_XIAOMI_VINCE))
 	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF, 1,
 #else
 	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF,
