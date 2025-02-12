@@ -341,7 +341,7 @@ int is_ext_spk_gpio_support(struct platform_device *pdev,
 		ext_pa_gpio = pdata->spk_ext_pa_gpio;
 #endif
 		}
-#ifdef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 	gpio_direction_output(pdata->spk_ext_pa_gpio, 0);
 #endif
 	}
@@ -352,10 +352,10 @@ static int enable_spk_ext_pa(struct snd_soc_codec *codec, int enable)
 {
 	struct snd_soc_card *card = codec->component.card;
 	struct msm_asoc_mach_data *pdata = snd_soc_card_get_drvdata(card);
-#ifndef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 	int ret;
 #endif
-#ifdef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 	int pa_mode = EXT_PA_MODE;
 #endif
 
@@ -373,7 +373,7 @@ static int enable_spk_ext_pa(struct snd_soc_codec *codec, int enable)
 		enable ? "Enable" : "Disable");
 
 	if (enable) {
-#ifdef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 		while (pa_mode > 0) {
 			gpio_set_value_cansleep(pdata->spk_ext_pa_gpio, 0);
 			udelay(2);
@@ -393,7 +393,7 @@ static int enable_spk_ext_pa(struct snd_soc_codec *codec, int enable)
 #endif
 	} else {
 		gpio_set_value_cansleep(pdata->spk_ext_pa_gpio, enable);
-#ifndef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 		ret = msm_cdc_pinctrl_select_sleep_state(
 				pdata->spk_ext_pa_gpio_p);
 		if (ret) {
@@ -1579,7 +1579,7 @@ static void *def_msm8952_wcd_mbhc_cal(void)
 	 * 210-290 == Button 2
 	 * 360-680 == Button 3
 	 */
-#ifdef CONFIG_MACH_XIAOMI_MIDO
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW)
 	btn_low[0] = 73;
 	btn_high[0] = 73;
 	btn_low[1] = 233;
@@ -1657,7 +1657,7 @@ static int msm_audrx_init(struct snd_soc_pcm_runtime *rtd)
 	snd_soc_dapm_ignore_suspend(dapm, "DMIC2");
 	snd_soc_dapm_ignore_suspend(dapm, "WSA_SPK OUT");
 	snd_soc_dapm_ignore_suspend(dapm, "LINEOUT");
-#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_TISSOT)
+#if (defined CONFIG_MACH_XIAOMI_MIDO) || (defined CONFIG_MACH_XIAOMI_MARKW) || (defined CONFIG_MACH_XIAOMI_TISSOT)
 	snd_soc_dapm_ignore_suspend(dapm, "Ext Spk");
 #endif
 
